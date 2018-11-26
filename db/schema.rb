@@ -39,9 +39,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "animal_medicines", force: :cascade do |t|
-    t.integer "animal_id"
-    t.integer "medicine_id"
+    t.bigint "animal_id"
+    t.bigint "medicine_id"
     t.integer "recommended_num_of_units"
     t.index ["animal_id"], name: "index_animal_medicines_on_animal_id"
     t.index ["medicine_id"], name: "index_animal_medicines_on_medicine_id"
@@ -53,8 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
   end
 
   create_table "dosages", force: :cascade do |t|
-    t.integer "visit_id"
-    t.integer "medicine_id"
+    t.bigint "visit_id"
+    t.bigint "medicine_id"
     t.integer "units_given"
     t.float "discount", default: 0.0
     t.index ["medicine_id"], name: "index_dosages_on_medicine_id"
@@ -62,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
   end
 
   create_table "medicine_costs", force: :cascade do |t|
-    t.integer "medicine_id"
+    t.bigint "medicine_id"
     t.integer "cost_per_unit"
     t.date "start_date"
     t.date "end_date"
@@ -84,8 +87,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
     t.integer "notable_id"
     t.string "title"
     t.text "content"
-    t.integer "user_id"
-    t.datetime "written_on", precision: nil
+    t.bigint "user_id"
+    t.datetime "written_on"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -104,8 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
 
   create_table "pets", force: :cascade do |t|
     t.string "name"
-    t.integer "animal_id"
-    t.integer "owner_id"
+    t.bigint "animal_id"
+    t.bigint "owner_id"
     t.boolean "female"
     t.date "date_of_birth"
     t.boolean "active", default: true
@@ -114,7 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
   end
 
   create_table "procedure_costs", force: :cascade do |t|
-    t.integer "procedure_id"
+    t.bigint "procedure_id"
     t.integer "cost"
     t.date "start_date"
     t.date "end_date"
@@ -129,8 +132,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
   end
 
   create_table "treatments", force: :cascade do |t|
-    t.integer "visit_id"
-    t.integer "procedure_id"
+    t.bigint "visit_id"
+    t.bigint "procedure_id"
     t.boolean "successful"
     t.float "discount", default: 0.0
     t.index ["procedure_id"], name: "index_treatments_on_procedure_id"
@@ -147,7 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
   end
 
   create_table "visits", force: :cascade do |t|
-    t.integer "pet_id"
+    t.bigint "pet_id"
     t.date "date"
     t.float "weight"
     t.boolean "overnight_stay"
@@ -155,8 +158,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
     t.index ["pet_id"], name: "index_visits_on_pet_id"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "animal_medicines", "animals"
   add_foreign_key "animal_medicines", "medicines"
   add_foreign_key "dosages", "medicines"
