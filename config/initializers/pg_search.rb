@@ -3,9 +3,9 @@
 # :trigram    => based on trigram matching
 # :tsearch    => using postgres' tsvector for full-text searching
 
-# PgSearch.multisearch_options = {
-#   :using => [:dmetaphone, :trigram, :tsearch]
-# }
 PgSearch.multisearch_options = {
-    :using => [:dmetaphone]
-  }
+  :using => [:dmetaphone, :trigram, :tsearch]
+}
+# PgSearch.multisearch_options = {
+#     :using => [:dmetaphone]
+#   }
