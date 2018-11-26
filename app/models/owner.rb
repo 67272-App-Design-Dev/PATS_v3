@@ -8,7 +8,7 @@ class Owner < ApplicationRecord
 
   # Search
   include PgSearch
-  multisearchable :against => [:last_name, :first_name]
+  pg_search_scope :search_name, :against => [:last_name, :first_name], :using => [:dmetaphone]
     
   # Relationships
   # -----------------------------

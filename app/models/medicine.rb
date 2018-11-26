@@ -6,7 +6,9 @@ class Medicine < ApplicationRecord
 
   # Search
   include PgSearch
-  multisearchable :against => [:name, :description]
+  pg_search_scope :search_full_text, 
+    :against => [[:name, 'A'], [:description, 'B']], 
+    :using   => { :tsearch => {:prefix => true} }
   
   # Relationships
   has_many :animal_medicines

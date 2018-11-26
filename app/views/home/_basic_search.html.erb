@@ -17,3 +17,23 @@
   </ul>
   <p class="supertiny">&nbsp;</p>
 <% end %>
+
+<% unless @medicines.empty? %>
+  <p><em><strong>Medicines matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for medicine in @medicines do %>
+      <li><%= link_to medicine.name, medicine_path(medicine) %></li>
+    <% end %>
+  </ul>
+  <p class="supertiny">&nbsp;</p>
+<% end %>
+
+<% unless @procedures.empty? %>
+  <p><em><strong>Procedures matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for procedure in @procedures do %>
+      <li><%= link_to procedure.name, procedure_path(procedure) %></li>
+    <% end %>
+  </ul>
+  <p class="supertiny">&nbsp;</p>
+<% end %>

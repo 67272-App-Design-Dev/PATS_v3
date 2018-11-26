@@ -6,6 +6,6 @@
 # PgSearch.multisearch_options = {
 #   :using => [:dmetaphone, :trigram, :tsearch]
 # }
-PgSearch.multisearch_options = {
-    :using => [:dmetaphone]
-  }
+# PgSearch.multisearch_options = {
+#     :using => [:dmetaphone]
+#   }

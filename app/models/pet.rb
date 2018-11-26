@@ -8,7 +8,7 @@ class Pet < ApplicationRecord
 
   # Search
   include PgSearch
-  multisearchable :against => [:name]
+  pg_search_scope :search_name, :against => [:name], :using => [:dmetaphone, :trigram]
 
   # Relationships
   # -----------------------------
