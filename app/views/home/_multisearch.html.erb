@@ -1,0 +1,17 @@
+<% unless @results.empty? %>
+  <p><em><strong>Results matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for result in @results do %>
+      <% if result.is_a?(Owner) %>
+        <li><%= link_to result.content, owner_path(owner) %></li>
+      <% elsif result.is_a?(Pet) %>
+        <li><%= link_to result.content, pet_path(result) %>: owned by <%= "#{pet.owner.name}" %></li>
+      <% elsif result.is_a?(Medicine) %>
+        <li><%= link_to result.content, medicine_path(result) %></li>
+      <% else %>
+        <li><%= link_to result.content, procedure_path(result) %></li>
+      <% end%>
+    <% end %>
+  </ul>
+  <p class="smtext">&nbsp;</p>
+<% end %>

@@ -4,6 +4,10 @@ class Procedure < ApplicationRecord
   include Activeable::InstanceMethods
   extend Activeable::ClassMethods
 
+  # Search
+  include PgSearch
+  multisearchable :against => [:name, :description]
+
   # Relationships
   has_many :procedure_costs
   has_many :treatments

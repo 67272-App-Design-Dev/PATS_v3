@@ -1,0 +1,19 @@
+<% unless @owners.empty? %>
+  <p><em><strong>Owners matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for owner in @owners do %>
+      <li><%= link_to owner.name, owner_path(owner) %></li>
+    <% end %>
+  </ul>
+  <p class="smtext">&nbsp;</p>
+<% end %>
+
+<% unless @pets.empty? %>
+  <p><em><strong>Pets matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for pet in @pets do %>
+      <li><%= link_to pet.name, pet_path(pet) %>: owned by <%= "#{pet.owner.name}" %></li>
+    <% end %>
+  </ul>
+  <p class="supertiny">&nbsp;</p>
+<% end %>

@@ -41,6 +41,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "fuzzystrmatch"
+  enable_extension "pg_trgm"
 
   create_table "animal_medicines", force: :cascade do |t|
     t.bigint "animal_id"

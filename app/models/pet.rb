@@ -6,6 +6,10 @@ class Pet < ApplicationRecord
   include Activeable::InstanceMethods
   extend Activeable::ClassMethods
 
+  # Search
+  include PgSearch
+  multisearchable :against => [:name]
+
   # Relationships
   # -----------------------------
   belongs_to :animal
