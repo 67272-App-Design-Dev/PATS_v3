@@ -5,6 +5,10 @@ class Owner < ApplicationRecord
   extend Activeable::ClassMethods
 
   attr_accessor :username, :password, :password_confirmation
+
+  # Search
+  include PgSearch
+  multisearchable :against => [:last_name, :first_name]
     
   # Relationships
   # -----------------------------
