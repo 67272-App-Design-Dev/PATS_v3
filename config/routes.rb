@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   post 'procedure_costs', to: 'procedure_costs#create', as: :procedure_costs
 
   # Other custom routes
-  get 'visits/:id/dosages', to: 'visits#dosages', as: :visit_dosages
+  # get 'visits/:id/dosages', to: 'visits#dosages', as: :visit_dosages
 
   # Routes for searching
   # get 'medicines/search', to: 'medicines#search', as: :medicine_search
