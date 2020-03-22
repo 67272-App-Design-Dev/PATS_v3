@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # Use built-in rails support for password protection
   has_secure_password
+  # attr_accessor :password, :password_confirmation
     
   # Relationships
   # has_many :notes
