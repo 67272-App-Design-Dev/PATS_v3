@@ -37,9 +37,5 @@ class PasswordManagerTest < ActiveSupport::TestCase
       assert @pswd_manager.expired?
     end
 
-    # should "something" do
-      
-    # end
-
   end
 end
