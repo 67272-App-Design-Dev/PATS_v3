@@ -20,8 +20,10 @@ class PasswordManagerTest < ActiveSupport::TestCase
     end
 
     should "set reset time and send email" do
+      assert_nil @alex_user.password_reset_token
       @pswd_manager.send_email
       @alex_user.reload
+      refute_nil @alex_user.password_reset_token
       assert_in_delta(Time.now.to_f, @alex_user.password_reset_sent_at.to_f, 10)
       # actual sending of email test has to be done in controller test
     end
