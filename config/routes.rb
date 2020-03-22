@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'home/search', to: 'home#search', as: :search
 
   # Authentication routes
-  resources :sessions
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :password_resets
   resources :users
   get 'users/new', to: 'users#new', as: :signup
   get 'user/edit', to: 'users#edit', as: :edit_current_user

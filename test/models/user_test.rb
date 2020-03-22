@@ -72,5 +72,11 @@ class UserTest < ActiveSupport::TestCase
       deny User.authenticate('jordan', 'notsecret')
     end
 
+    should "properly delegate email to owner, if associated with owner" do
+      create_owners
+      assert_equal "alex.heimann@example.com", @alex_user.email
+      assert_nil @jordan.email
+    end
+
   end
 end

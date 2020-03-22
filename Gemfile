@@ -80,6 +80,7 @@ group :development, :test do
   gem 'cucumber-rails', '~> 2.6.1', require: false
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'letter_opener'
 end
 
 # need to run

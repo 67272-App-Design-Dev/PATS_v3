@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
     redirect_to home_path
   end
   
+  # Rescue from bad password reset token
+  rescue_from Exceptions::NoPasswordResetToken do |exception|
+    flash[:error] = "The password reset token is either invalid or has expired."
+    redirect_to home_path
+  end
+
+
   private
   # Handling authentication
   def current_user

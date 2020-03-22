@@ -1,0 +1,16 @@
+<h2>Password Reset</h2>
+
+<p>If you forgot your password, provide your username and we will send you an 
+option to reset the password. Please note that this option is time-dependent 
+and is good for only one hour; if you do not complete this process in this time, 
+your password will remain as it was last set.</p>
+
+<%= form_tag password_resets_path, method: :post do %>
+  <div class="field">
+    <%= label_tag :username, "Username: " %>
+    <%= text_field_tag :username, params[:username] %>
+  </div>
+  <br />
+  <!-- <p>&nbsp;</p> -->
+  <div class="actions"><%= submit_tag "Reset Password" %></div>
+<% end %>
