@@ -1,0 +1,449 @@
+<!DOCTYPE HTML SYSTEM>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Brakeman Report</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    function toggle(context) {
+      var elem = document.getElementById(context);
+
+      if (elem.style.display != "block")
+        elem.style.display = "block";
+      else
+        elem.style.display = "none";
+
+      elem.parentNode.scrollIntoView();
+    }
+
+    $(document).ready(function() {
+      $('table').DataTable({
+        searching: false,
+        paging:    false,
+        info:      false
+      });
+    });
+  </script>
+  <style>
+    /* CSS style used for HTML reports */
+
+body {
+  font-family: sans-serif;
+  color: #161616;
+}
+
+a {
+  color: #161616;
+}
+
+p {
+  font-weight: bold;
+  font-size: 11pt;
+  color: #2D0200;
+ }
+
+ th {
+   background-color: #980905;
+   border-bottom: 5px solid #530200;
+   color: white;
+   font-size: 11pt;
+   padding: 1px 8px 1px 8px;
+ }
+
+ td {
+   border-bottom: 2px solid white;
+   font-family: monospace;
+   padding: 5px 8px 1px 8px;
+ }
+
+ table {
+   background-color: #FCF4D4;
+   border-collapse: collapse;
+ }
+
+ h1 {
+   color: #2D0200;
+   font-size: 14pt;
+ }
+
+ h2 {
+   color: #2D0200;
+   font-size: 12pt;
+ }
+
+ span.high-confidence {
+   font-weight:bold;
+   color: red;
+ }
+
+ span.med-confidence {
+ }
+
+ span.weak-confidence {
+   color:gray;
+ }
+
+ div.warning_message {
+   cursor: pointer;
+ }
+
+ div.warning_message:hover {
+   background-color: white;
+ }
+
+ table caption {
+   background-color: #FFE;
+   padding: 2px;
+ }
+
+ table.context {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   border-left: 1px solid #90e960;
+   color: #212121;
+ }
+
+ tr.context {
+   background-color: white;
+ }
+
+ tr.first {
+   border-top: 1px solid #7ecc54;
+   padding-top: 2px;
+ }
+
+ tr.error {
+  background-color: #f4c1c1 !important
+ }
+
+ tr.near_error {
+  background-color: #f4d4d4 !important
+ }
+
+ tr.alt {
+   background-color: #e8f4d4;
+ }
+
+ td.context {
+   padding: 2px 10px 0px 6px;
+   border-bottom: none;
+ }
+
+ td.context_line {
+   padding: 2px 8px 0px 7px;
+   border-right: 1px solid #b3bda4;
+   border-bottom: none;
+   color: #6e7465;
+ }
+
+ pre.context {
+   margin-bottom: 1px;
+ }
+
+ .user_input {
+   background-color: #fcecab;
+ }
+
+ div.render_path {
+   display: none;
+   background-color: #ffe;
+   padding: 5px;
+   margin: 2px 0px 2px 0px;
+ }
+
+ div.template_name {
+   cursor: pointer;
+ }
+
+ div.template_name:hover {
+   background-color: white;
+ }
+
+ span.code {
+   font-family: monospace;
+ }
+
+ span.filename {
+   font-family: monospace;
+ }
+
+  </style>
+</head>
+<body>
+
+<h1>Brakeman Report</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Application Path</th>
+      <th>Rails Version</th>
+      <th>Brakeman Version</th>
+      <th>Report Time</th>
+      <th>Checks Performed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/Users/profh/PATS/67272_PATS_v3</td>
+      <td>5.1.4</td>
+      <td>4.8.1
+      <td>
+        2020-04-26 12:03:46 -0400<br><br>
+        1.024415 seconds
+      </td>
+      <td>BasicAuth, BasicAuthTimingAttack, ContentTag, CookieSerialization, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, DynamicFinders, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, MimeTypeDoS, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NestedAttributesBypass, NumberToCurrency, PermitAttributes, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, RouteDoS, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, SprocketsPathTraversal, StripTags, SymbolDoSCVE, TranslateBug, UnsafeReflection, ValidationRegex, WithoutProtection, XMLDoS, YAMLParsing</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2 id='summary'>Summary</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Scanned/Reported</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Controllers</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>Models</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>Templates</td>
+      <td>84</td>
+    </tr>
+    <tr>
+      <td>Errors</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Security Warnings</td>
+      <td>2 <span class='high-confidence'>(0)</span></td>
+    </tr>
+  
+    <tr>
+      <td>Ignored Warnings</td>
+      <td>0</td>
+    </tr>
+  
+  </tbody>
+</table>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Warning Type</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>Cross-Site Scripting</td>
+      <td>1</td>
+    </tr>
+  
+    <tr>
+      <td>Mass Assignment</td>
+      <td>1</td>
+    </tr>
+  
+  </tbody>
+</table>
+<br>
+<h2>Security Warnings</h2>  
+<table>
+  <thead>
+    <tr>
+      <th>Confidence</th>
+      <th>Class</th>
+      <th>Method</th>
+      <th>Warning Type</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>UsersController</td>
+      <td>user_params</td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/mass_assignment/">Mass Assignment</a></td>
+      <td><div class='warning_message' onClick="toggle('context1');toggle('message1');toggle('full_message1')" >Potentially dangerous key allowed for mass assignment near line 53: <span class="code">params.require(:user).permit(:first_name, :last_name, :active, :username, <span class="user_input">:role</span>, :password, :password_confirmation)</span><table id='context1' class='context' style='display:none'><caption>app/controllers/users_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>48</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    def set_user</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>49</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      @user = User.find(params[:id])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>50</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>52</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def user_params</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>53</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      params.require(:user).permit(:first_name, :last_name, :active, :username, :role, :password, :password_confirmation)</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>54</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>56</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>end</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td></td>
+      <td></td>
+      <td><a rel="noreferrer" href="https://groups.google.com/d/msg/rubyonrails-security/tP7W3kLc5u4/uDy2Br7xBgAJ">Cross-Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context2');toggle('message2');toggle('full_message2')" >rails-html-sanitizer 1.0.3 is vulnerable (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3741" target="_blank" rel="noreferrer">CVE-2018-3741</a>). Upgrade to rails-html-sanitizer 1.0.4 near line 206<table id='context2' class='context' style='display:none'><caption>Gemfile.lock</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>201</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>      actionview (~&gt; 5.x, &gt;= 5.0.1)</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>202</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      activesupport (~&gt; 5.x)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>203</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    rails-dom-testing (2.0.3)</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>204</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      activesupport (&gt;= 4.2.0)</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>205</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      nokogiri (&gt;= 1.6)</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>206</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    rails-html-sanitizer (1.0.3)</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>207</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      loofah (~&gt; 2.0)</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>208</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    railties (5.1.4)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>209</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      actionpack (= 5.1.4)</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>210</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      activesupport (= 5.1.4)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>211</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      method_source</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+  </tbody>
+</table>
+</body></html>
