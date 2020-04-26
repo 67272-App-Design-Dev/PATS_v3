@@ -11,10 +11,10 @@ class PetsController < ApplicationController
       @active_pets = current_user.owner.pets.active.alphabetical.paginate(page: params[:page]).per_page(10)
       @inactive_pets = current_user.owner.pets.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
     else
-      @active_pets = Pet.active.alphabetical.paginate(page: params[:page]).per_page(100)
-      @inactive_pets = Pet.inactive.alphabetical.paginate(page: params[:page]).per_page(100)
-      # @active_pets = Pet.active.alphabetical.includes([:owner, :animal]).paginate(page: params[:page]).per_page(100)
-      # @inactive_pets = Pet.inactive.alphabetical.includes([:owner, :animal]).paginate(page: params[:page]).per_page(100)
+      # @active_pets = Pet.active.alphabetical.paginate(page: params[:page]).per_page(100)
+      # @inactive_pets = Pet.inactive.alphabetical.paginate(page: params[:page]).per_page(100)
+      @active_pets = Pet.active.alphabetical.joins(:animal, :owner).select("pets.*, animals.name as animal_name, owners.last_name || ', ' || owners.first_name as owner_name, owners.id as owner_id").paginate(page: params[:page]).per_page(100)
+      @inactive_pets = Pet.inactive.alphabetical.joins(:animal, :owner).select("pets.*, animals.name as animal_name, owners.last_name || ', ' || owners.first_name as owner_name, owners.id as owner_id").paginate(page: params[:page]).per_page(100)
     end
 
   end
