@@ -1,0 +1,8 @@
+<%= render partial: "partials/tabbed_content/all_tabs", locals: {tab_base: "pets", 
+                                                         primary_object: @active_pets,
+                                                         secondary_object: @inactive_pets,
+                                                         tertiary_object: nil,
+                                                         display_partial: ["pets_list","pets_list"],                                                         
+                                                         states: ['active','inactive']} %>
+
+<%= render :partial => "partials/add_new_object", locals: {model_name: 'pet'} %>

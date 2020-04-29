@@ -1,0 +1,7 @@
+<% if secondary_object.nil? || (secondary_object.respond_to?(:empty?) && secondary_object.empty?) %>
+  <h5>
+    <%= "No #{state} #{tab_base} at this time" %>
+  </h5>
+<% else %>
+  <%= render partial: "#{display_partial}", locals: {state: state, object: secondary_object} %>
+<% end %>

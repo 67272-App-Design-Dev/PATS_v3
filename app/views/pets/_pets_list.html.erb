@@ -1,9 +1,5 @@
 <h4><%= state.capitalize %> Pets at PATS</h4>
 
-<% if pets.empty? %>
-  <p>There are no <%= state.downcase %> pets at this time.</p>
-<% else %>
-
   <table class="striped highlight">
     <thead>
       <th>Pet</th>
@@ -11,7 +7,7 @@
       <th>Owner</th>
       <th class="align_center">Options</th>
     </thead>
-    <% for pet in pets %>
+    <% for pet in object %>
       <tr class="<%= cycle('dg_list_line_odd', 'dg_list_line_even') %>">
         <td><%= link_to pet.name, pet_path(pet) %></td>
         <td><%= pet.animal_name %></td>
@@ -35,5 +31,4 @@
   </table>
   <p class="supertiny"></p>
   <br />
-  <%= will_paginate pets, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
-<% end %>
+  <%= will_paginate object, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>

@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-content">
+    <div id="tabbed">
+      <tabs>
+
+        <tab name="<%= "#{states[0]} #{tab_base}" %>" v-bind:selected="true">
+          <%= render partial: "partials/tabbed_content/primary_tab", locals: {display_partial: display_partial[0], primary_object: primary_object, state: states[0], tab_base: tab_base} %>
+        </tab>
+
+        <tab name="<%= "#{states[1]} #{tab_base}" %>">
+          <%= render partial: "partials/tabbed_content/secondary_tab", locals: {display_partial: display_partial[1], secondary_object: secondary_object, state: states[1], tab_base: tab_base} %>
+        </tab>
+
+        <% unless tertiary_object.nil? %>
+          <tab name="<%= "#{states[2]} #{tab_base}" %>">
+            <%= render partial: "partials/tabbed_content/tertiary_tab", locals: {display_partial: display_partial[2], tertiary_object: tertiary_object, state: states[2], tab_base: tab_base} %>
+          </tab>
+        <% end %>
+
+      </tabs>
+    </div>
+  </div>
+</div>
+
+<p>&nbsp;</p>
