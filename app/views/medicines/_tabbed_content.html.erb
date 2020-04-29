@@ -1,0 +1,6 @@
+<%= render partial: "partials/tabbed_content/all_tabs", locals: {tab_base: "medicines", 
+                                                         primary_object: @active_medicines,
+                                                         secondary_object: @inactive_medicines,
+                                                         tertiary_object: nil,
+                                                         display_partial: ["medicines_list","medicines_list"],                                                         
+                                                         states: ['active','inactive']} %>

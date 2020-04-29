@@ -6,10 +6,12 @@ class MedicinesController < ApplicationController
 
   def index
     # get all visits in reverse chronological order, 10 per page
-    respond_to do |format|
-      format.html { @medicines = Medicine.alphabetical.paginate(page: params[:page]).per_page(10) }
-      format.json { @medicines = Medicine.alphabetical.all }
-    end
+    @active_medicines = Medicine.active.alphabetical.paginate(page: params[:page]).per_page(10)
+    @inactive_medicines = Medicine.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
+    # respond_to do |format|
+      # format.html { @medicines = Medicine.alphabetical.paginate(page: params[:page]).per_page(10) }
+      # format.json { @medicines = Medicine.alphabetical.all }
+    # end
     
   end
   

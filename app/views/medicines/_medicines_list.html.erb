@@ -9,7 +9,7 @@
       <th class="align_center">Options</th>
     <% end %>
   </thead>
-  <% for medicine in @medicines %>
+  <% for medicine in object %>
     <tr>
       <td><%= link_to medicine.name, medicine_path(medicine) %></td>
       <td><%= number_with_delimiter(medicine.stock_amount) %> <%= medicine.unit %></td>
@@ -29,6 +29,6 @@
   <% end %>
 </table>
 <br />
-<%= will_paginate @medicines, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<%= will_paginate object, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
 <p>&nbsp;</p>
 <%= render :partial => "partials/add_new_object", locals: {model_name: 'medicine'} %>
