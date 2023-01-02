@@ -11,7 +11,7 @@ ruby '3.1.2'
 gem 'rails', '7.0.4'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3', '1.3.13'
-gem 'pg', '0.21.0'
+gem 'pg', '~> 1.4.5'
 # Use Puma as the app server
 gem 'puma', '4.1'
 # Use SCSS for stylesheets
@@ -53,7 +53,7 @@ gem 'carrierwave', '1.2.2'
 gem 'will_paginate', '3.3.1'
 gem 'vuejs-rails', '2.5.13'
 gem "best_in_place", git: "https://github.com/mmotherwell/best_in_place"
-gem 'pg_search', '2.1.2'
+gem 'pg_search', '~> 2.3.6'
 
 
 # TODO: determine if necessary in rails 7.1.0

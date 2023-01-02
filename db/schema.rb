@@ -11,6 +11,11 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "fuzzystrmatch"
+  enable_extension "pg_trgm"
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -38,11 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-  enable_extension "fuzzystrmatch"
-  enable_extension "pg_trgm"
 
   create_table "animal_medicines", force: :cascade do |t|
     t.bigint "animal_id"
@@ -90,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
     t.string "title"
     t.text "content"
     t.bigint "user_id"
-    t.datetime "written_on"
+    t.datetime "written_on", precision: nil
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -122,8 +122,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
     t.text "content"
     t.string "searchable_type"
     t.bigint "searchable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
@@ -169,6 +169,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
     t.index ["pet_id"], name: "index_visits_on_pet_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "animal_medicines", "animals"
   add_foreign_key "animal_medicines", "medicines"
   add_foreign_key "dosages", "medicines"
