@@ -145,8 +145,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_023435) do
     t.string "password_digest"
     t.boolean "active", default: true
     t.string "password_reset_token"
-    t.datetime "password_reset_sent_at"
-    t.datetime "active_after"
+    t.datetime "password_reset_sent_at", precision: nil
+    t.datetime "active_after", precision: nil
   end
 
   create_table "visits", force: :cascade do |t|
