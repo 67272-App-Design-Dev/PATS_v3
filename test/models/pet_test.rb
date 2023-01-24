@@ -103,17 +103,5 @@ class PetTest < ActiveSupport::TestCase
       # again we've created plenty of valid pets earlier, so only testing the bad cases here...
     end
     
-    should "never be destroyed" do
-      deny @dusty.destroy
-    end
-    
-    should "deactivate a pet instead of destroying it" do
-      assert @dusty.active
-      @dusty.destroy
-      @dusty.reload
-      deny @dusty.active
-    end
-    
-    
   end
 end

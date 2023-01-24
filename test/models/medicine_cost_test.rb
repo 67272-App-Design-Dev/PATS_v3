@@ -57,28 +57,6 @@ class MedicineCostTest < ActiveSupport::TestCase
       @change_cost.destroy
     end
     
-    should "show that a medicine cost that has been used cannot be destroyed but made inactive" do
-      # add additional contexts
-      create_animals
-      create_owners
-      create_pets
-      create_visits
-      create_animal_medicines
-      create_dosages
-      # assert conditions prior to test
-      assert @rabies.active
-      deny @rabies.dosages.empty?
-      # test the before_destroy callback
-      deny @rabies_c1.destroy
-      # remove additional contexts
-      destroy_dosages
-      destroy_animal_medicines
-      destroy_visits
-      destroy_pets
-      destroy_owners
-      destroy_animals
-    end
-
     should "show that a medicine that has never been used can be destroyed" do
       catnip = FactoryBot.create(:medicine, name: "Catnippititus")
       catnip_cost = FactoryBot.create(:medicine_cost, medicine: catnip, start_date: 1.month.ago.to_date, cost_per_unit: 60)

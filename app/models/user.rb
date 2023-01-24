@@ -11,6 +11,14 @@ class User < ApplicationRecord
   # has_many :notes
   has_one :owner
 
+  # enums
+  enum :role, { vet: 1, assistant: 2, owner: 3}, scopes: true, default: :owner
+  ROLES = [
+    ['Vet', User.roles[:vet]],
+    ['Assistant', User.roles[:assistant]],
+    ['Owner', User.roles[:owner]]
+  ]
+
   # Validations
   # make sure required fields are present
   validates_presence_of :first_name, :last_name 
@@ -29,14 +37,6 @@ class User < ApplicationRecord
   
   def name
     last_name + ", " + first_name
-  end
-
-  # for use in authorizing with CanCan
-  ROLES = [['Vet', :vet],['Assistant', :assistant],['Owner', :owner]]
-
-  def role?(authorized_role)
-    return false if role.nil?
-    role.downcase.to_sym == authorized_role
   end
   
   # login by username

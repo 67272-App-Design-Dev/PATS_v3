@@ -1,8 +1,6 @@
-require 'helpers/deletions'
 require 'helpers/Activeable'
 
 class Animal < ApplicationRecord
-  include Deletions
   extend Activeable::ClassMethods
 
   # Relationships
@@ -15,8 +13,5 @@ class Animal < ApplicationRecord
    
   # Validations
   validates_presence_of :name
-
-  # Callback - to prevent deletions
-  before_destroy :cannot_destroy_object
 
 end

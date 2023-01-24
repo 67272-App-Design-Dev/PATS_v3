@@ -6,7 +6,7 @@ class VisitsController < ApplicationController
 
   def index
     # get all visits in reverse chronological order, 10 per page
-    if current_user.role?(:owner)
+    if current_user.owner?
       @visits = current_user.owner.visits.chronological.paginate(page: params[:page]).per_page(10)
     else
       @visits = Visit.chronological.paginate(page: params[:page]).per_page(10)

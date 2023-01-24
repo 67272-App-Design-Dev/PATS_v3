@@ -10,12 +10,6 @@ class UserTest < ActiveSupport::TestCase
   should allow_value("vet").for(:role)
   should allow_value("assistant").for(:role)
   should allow_value("owner").for(:role)
-  should_not allow_value("bad").for(:role)
-  should_not allow_value("hacker").for(:role)
-  should_not allow_value(10).for(:role)
-  should_not allow_value("leader").for(:role)
-  should_not allow_value(nil).for(:role)
-  
   
   # context
   context "Within context" do
@@ -38,12 +32,12 @@ class UserTest < ActiveSupport::TestCase
     should "have role methods and recognize all three roles" do
       egruberman = FactoryBot.build(:user)
       alex_user = FactoryBot.build(:user, first_name: "Alex", last_name: "Heimann", username: "alex", role: "owner")
-      assert egruberman.role?(:assistant)
-      deny egruberman.role?(:vet)
-      assert alex_user.role?(:owner)
-      deny alex_user.role?(:assistant)
-      assert @becca.role?(:vet)
-      deny @becca.role?(:assistant)
+      assert egruberman.assistant?
+      deny egruberman.vet?
+      assert alex_user.owner?
+      deny alex_user.assistant?
+      assert @becca.vet?
+      deny @becca.assistant?
     end
 
     should "have name methods for users" do

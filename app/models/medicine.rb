@@ -11,6 +11,14 @@ class Medicine < ApplicationRecord
   has_many :dosages
   has_many :visits, :through => :dosages
 
+  enum :admin_method, { oral: 1, injection: 2, intravenous: 3, topical: 4}, scopes: false
+  ADMIN_METHODS = [
+    ["Oral", Medicine.admin_methods[:oral]],
+    ["Injection", Medicine.admin_methods[:injection]],
+    ["Intravenous", Medicine.admin_methods[:intravenous]],
+    ["Topical", Medicine.admin_methods[:topical]],
+  ]
+
   # Scopes
   scope :alphabetical, -> { order('name') }
   scope :depleted,     -> { where('stock_amount < ?', 100) }

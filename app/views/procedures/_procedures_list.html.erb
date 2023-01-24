@@ -5,7 +5,7 @@
     <th>Name</th>
     <th class="align_center">Minutes</th>
     <th class="align_center">Current Cost</th>
-    <% if current_user.role? :vet %>
+    <% if current_user.vet? %>
       <th class="align_center">Options</th>
     <% end %>
   </thead>
@@ -14,7 +14,7 @@
       <td><%= link_to procedure.name, procedure_path(procedure) %></td>
       <td class="align_center"><%= procedure.length_of_time %></td>
       <td class="align_center"><%= procedure.current_cost.nil? ? 'N/A' : number_to_currency(procedure.current_cost/100) %></td>
-      <% if current_user.role? :vet %>
+      <% if current_user.vet? %>
         <td class="align_center">
         <%= link_to edit_procedure_path(procedure) do %>
               <i class="material-icons">edit</i>

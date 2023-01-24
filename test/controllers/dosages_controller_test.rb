@@ -28,9 +28,7 @@ class DosagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy dosage" do
     @dosage = FactoryBot.create(:dosage, visit: @visit, medicine: @medicine)
-    assert_difference('Dosage.count', -1) do
-      delete dosage_path(@dosage)
-    end
+    delete dosage_path(@dosage)
 
     assert_redirected_to visit_path(@dosage.visit)
   end

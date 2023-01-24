@@ -6,11 +6,11 @@ class Ability
     user ||= User.new # i.e., a guest user
     
     # set authorizations for different user roles
-    if user.role? :vet
+    if user.vet?
       # they get to do it all
       can :manage, :all
       
-    elsif user.role? :assistant
+    elsif user.assistant?
       # can manage owners, pets, and visits
       can :manage, Owner
       can :manage, Pet
@@ -35,7 +35,7 @@ class Ability
       end
 
 
-    elsif user.role? :owner
+    elsif user.owner?
       # they can read their own data
       can :show, Owner do |this_owner|  
         user.owner == this_owner

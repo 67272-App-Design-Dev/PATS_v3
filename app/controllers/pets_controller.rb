@@ -7,7 +7,7 @@ class PetsController < ApplicationController
 
   def index
     # get data on all pets and paginate the output to 10 per page
-    if current_user.role?(:owner)
+    if current_user.owner?
       @active_pets = current_user.owner.pets.active.alphabetical.paginate(page: params[:page]).per_page(10)
       @inactive_pets = current_user.owner.pets.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
     else
@@ -47,13 +47,8 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    ## Same as owners
-    if @pet.destroy
-      # redirect_to pets_path, notice: "Removed #{@pet.name} from the PATS system"
-    else
-      @recent_visits = @pet.visits.chronological.last(10).to_a
-      render action: 'show'
-    end
+    @pet.make_inactive
+    redirect_to pets_path, notice: "Deactivated #{@pet.name}"
   end
 
   private

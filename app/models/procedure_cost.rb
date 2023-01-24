@@ -1,7 +1,4 @@
-require 'helpers/deletions'
-
 class ProcedureCost < ApplicationRecord
-  include Deletions
 
   # Relationships
   belongs_to :procedure
@@ -19,10 +16,6 @@ class ProcedureCost < ApplicationRecord
 
   # Callback (to handle in sqlite what we would have done in a postrges trigger)
   before_create :set_end_date_of_old_cost
-
-  before_destroy do 
-    cannot_destroy_object() unless self.procedure.treatments.empty?
-  end
 
   private
   def set_end_date_of_old_cost

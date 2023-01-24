@@ -58,26 +58,6 @@ class ProcedureCostTest < ActiveSupport::TestCase
       @change_cost.delete
     end
     
-    should "show that a procedure cost that has been used cannot be destroyed but made inactive" do
-      # add additional contexts
-      create_animals
-      create_owners
-      create_pets
-      create_visits
-      create_treatments
-      # assert conditions prior to test
-      assert @checkup.active
-      deny @checkup.treatments.empty?
-      # test the before_destroy callback
-      deny @checkup_c2.destroy
-      # remove additional contexts
-      destroy_treatments
-      destroy_visits
-      destroy_pets
-      destroy_owners
-      destroy_animals
-    end
-
     should "show that a procedure that has never been used can be destroyed" do
       chiropractic = FactoryBot.create(:procedure, name: "Chiropractic Manipulation")
       chiropractic_cost = FactoryBot.create(:procedure_cost, procedure: chiropractic, start_date: 1.month.ago.to_date, cost: 60)

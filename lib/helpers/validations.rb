@@ -27,10 +27,4 @@
         self.errors.add(attr_id.to_sym, "is not active in the system")
       end
     end
-
-    # Likewise multiple models do not allow for deletions, so we can 
-    # create a simple method here for callbacks to use as needed
-    def is_never_destroyable
-      return false
-    end
   end

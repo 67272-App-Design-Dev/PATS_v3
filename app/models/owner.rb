@@ -1,8 +1,6 @@
-require 'helpers/deletions'
 require 'helpers/activeable'
 
 class Owner < ApplicationRecord
-  include Deletions
   include Activeable::InstanceMethods
   extend Activeable::ClassMethods
 
@@ -69,11 +67,6 @@ class Owner < ApplicationRecord
   # create a callback that will strip non-digits before saving to db
   before_save :reformat_phone
 
-  # don't allow any owners to be destroyed
-  before_destroy do 
-    cannot_destroy_object()
-  end
-
   # convert destroy call to make inactive
   after_rollback :deactive_owner_user_and_pets
 
@@ -82,6 +75,12 @@ class Owner < ApplicationRecord
     if self.active && !self.user.active
       self.user.make_active
     end
+  end
+
+  def deactive_owner_user_and_pets
+    self.pets.each{ |pet| pet.make_inactive }
+    self.user.make_inactive
+    self.make_inactive
   end
   
    private
@@ -92,11 +91,4 @@ class Owner < ApplicationRecord
        self.phone = phone       # reset self.phone to new string
      end
 
-     def deactive_owner_user_and_pets
-       return true unless self.destroyable == false
-       self.pets.each{ |pet| pet.make_inactive }
-       self.user.make_inactive
-       self.make_inactive
-       errors.add(:base, "#{self.proper_name} could not be deleted but was made inactive instead, along with related pets and user account.")
-     end
 end

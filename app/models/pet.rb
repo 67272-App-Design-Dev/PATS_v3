@@ -1,10 +1,8 @@
 require 'helpers/activeable'
-require 'helpers/deletions'
 require 'helpers/validations'
 
 class Pet < ApplicationRecord
   include Validations
-  include Deletions
   include Activeable::InstanceMethods
   extend Activeable::ClassMethods
 
@@ -67,12 +65,6 @@ class Pet < ApplicationRecord
     self.female ? "Female" : "Male"
   end  
 
-  before_destroy do 
-    cannot_destroy_object()
-  end
-  
-  after_rollback :make_pet_inactive  #, on: :destroy
-  
   # Use private methods to execute the custom validations
   # -----------------------------
   private
@@ -82,12 +74,5 @@ class Pet < ApplicationRecord
   
   def owner_is_active_in_PATS_system
     is_active_in_system(:owner)
-  end
-
-  def make_pet_inactive
-    return true unless self.destroyable == false
-    self.make_inactive
-    msg = "This #{self.class.to_s.downcase} cannot be deleted but was made inactive instead."
-    errors.add(:base, msg)
   end
 end

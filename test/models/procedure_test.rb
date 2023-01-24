@@ -52,29 +52,6 @@ class ProcedureTest < ActiveSupport::TestCase
       assert_nil @ghost_proc.current_cost
     end
 
-    should "show that a procedure that has been used cannot be destroyed but made inactive" do
-      # add additional contexts
-      create_animals
-      create_owners
-      create_pets
-      create_visits
-      create_treatments
-      # assert conditions prior to test
-      assert @checkup.active
-      deny @checkup.treatments.empty?
-      # test the before_destroy callback
-      deny @checkup.destroy
-      @checkup.reload
-      # test the after_rollback callback
-      deny @checkup.active
-      # remove additional contexts
-      destroy_treatments
-      destroy_visits
-      destroy_pets
-      destroy_owners
-      destroy_animals
-    end
-
     should "show that a procedure that has never been used can be destroyed" do
       assert @dental.treatments.empty?
       @dental.destroy

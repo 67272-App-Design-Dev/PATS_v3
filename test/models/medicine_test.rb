@@ -73,31 +73,6 @@ class MedicineTest < ActiveSupport::TestCase
     #   assert_nil Medicine.ftsearch("")
     # end
 
-    should "show that a medicine that has been used cannot be destroyed but made inactive" do
-      # add additional contexts
-      create_animals
-      create_owners
-      create_pets
-      create_visits
-      create_animal_medicines
-      create_dosages
-      # assert conditions prior to test
-      assert @rabies.active
-      deny @rabies.dosages.empty?
-      # test the before_destroy callback
-      deny @rabies.destroy
-      @rabies.reload
-      # test the after_rollback callback
-      deny @rabies.active
-      # remove additional contexts
-      destroy_dosages
-      destroy_animal_medicines
-      destroy_visits
-      destroy_pets
-      destroy_owners
-      destroy_animals
-    end
-
     should "show that a medicine that has never been used can be destroyed" do
       catnip = FactoryBot.create(:medicine, name: "Catnippititus")
       catnip.destroy

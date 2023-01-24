@@ -25,7 +25,7 @@ class OwnersController < ApplicationController
   def create
     @owner = Owner.new(owner_params)
     @user = User.new(user_params)
-    @user.role = "owner"
+    @user.owner!
     if !@user.save
       @owner.valid?
       render action: 'new'
@@ -54,14 +54,8 @@ class OwnersController < ApplicationController
 
   def destroy
     ## We don't allow destroy (will deactivate instead)
-    if @owner.destroy
-      # irrelevant now...
-      # redirect_to owners_url, notice: "Successfully removed #{@owner.proper_name} from the PATS system."
-    else
-      # we still want this path with the base error message shown
-      @current_pets = @owner.pets.alphabetical.active.to_a
-      render action: 'show'
-    end
+    @owner.deactive_owner_user_and_pets
+    redirect_to owners_url, notice: "Successfully deactivated #{@owner.proper_name} along with associated user and pets."
   end
 
   private
