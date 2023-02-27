@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_one :owner
 
   # enums
-  enum :role, { vet: 1, assistant: 2, owner: 3}, scopes: true, default: :owner
+  enum :role, { vet: 1, assistant: 2, owner: 3}, scopes: true, default: :owner, suffix: true
   ROLES = [
     ['Vet', User.roles[:vet]],
     ['Assistant', User.roles[:assistant]],
