@@ -1,3 +1,1 @@
-<%= render partial: "partials/form_structure", locals: {object: @medicine, 
-                                                        type_of_form: "Edit Medicine",
-                                                        fields: "fields"} %>
+<%= react_component("MedicineEditor", { medicine: @medicine }) %>
