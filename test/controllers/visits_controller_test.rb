@@ -60,10 +60,4 @@ class VisitsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to visit_path(@visit)
   end
   
-  test "should get dosages" do
-    ## only used for json/vuejs; for now just an empty array
-    get("#{visit_dosages_path(@visit)}.json")
-    assert_response :success
-    assert_equal @response.body, "[]"
-  end
 end

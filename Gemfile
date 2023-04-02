@@ -50,8 +50,8 @@ gem 'validates_timeliness', git: "https://github.com/adzap/validates_timeliness"
 gem 'time_date_helpers', '0.0.2'
 gem 'carrierwave', '1.2.2'
 gem 'will_paginate', '3.3.1'
-gem 'vuejs-rails', '2.5.13'
 gem "best_in_place", git: "https://github.com/mmotherwell/best_in_place"
+gem 'fast_jsonapi'
 
 # TODO: determine if necessary in rails 7.1.0
 gem 'mime-types', '~> 3.4', '>= 3.4.1'
@@ -97,3 +97,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "shakapacker", "= 6.5"
+
+gem "react-rails", "= 2.6"

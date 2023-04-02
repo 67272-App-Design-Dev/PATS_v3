@@ -16,7 +16,7 @@ class VisitsController < ApplicationController
   def show
     get_related_data()
   end
-  
+
   def new
     @visit = Visit.new
   end
@@ -74,7 +74,7 @@ class VisitsController < ApplicationController
       @owner = @visit.pet.owner
       # get all the dosages & treatments associated with this visit, if any
       # note the difference in the sorting (treatments > dosages in terms of clarity)
-      @dosages = @visit.dosages.to_a.sort_by{|d| d.medicine.name}
-      @treatments = @visit.treatments.alphabetical
+      @dosages = dosages()
+      @treatments = @visit.treatments.alphabetical.map {|treatment| TreatmentSerializer.new(treatment)}
     end
 end

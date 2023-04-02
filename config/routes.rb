@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  # API routing
+  scope module: 'api', defaults: {format: 'json'} do
+    namespace :v1 do
+      # dosage related routes
+      post 'visits/:id/create_dosage', to: 'visit_show#create_dosage', as: :visit_create_dosage
+      get 'visits/:id/medicines', to: 'visit_show#medicines_for_visit', as: :visit_medicines
+      delete 'visits/:id/dosages/:dosage_id', to: 'visit_show#delete_dosage', as: :delete_visit_dosage
+
+      # treatment related routes
+      post 'visits/:id/create_treatment', to: 'visit_show#create_treatment', as: :visit_create_treatment
+      get 'visits/:id/procedures', to: 'visit_show#procedures', as: :visit_show_procedure
+    end
+  end
 
   # Semi-static page routes
   get 'home', to: 'home#index', as: :home
