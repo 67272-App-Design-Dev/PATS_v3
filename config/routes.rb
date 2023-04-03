@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       # treatment related routes
       post 'visits/:id/create_treatment', to: 'visit_show#create_treatment', as: :visit_create_treatment
       get 'visits/:id/procedures', to: 'visit_show#procedures', as: :visit_show_procedure
+      delete 'visits/:id/treatments/:treatment_id', to: 'visit_show#delete_treatment', as: :delete_visit_treatment
     end
   end
 

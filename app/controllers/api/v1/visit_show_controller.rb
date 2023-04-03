@@ -46,6 +46,15 @@ module Api::V1
       render json: { procedures: Procedure.alphabetical.to_a }
     end
 
+    def delete_treatment
+      @treatment = Treatment.find(params[:treatment_id])
+      if @treatment.destroy
+        render json: { message: "success!" }
+      else
+        render json: { errors: @treatment.errors.messages }, status: 500
+      end
+    end
+
     private
 
     def set_visit

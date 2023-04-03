@@ -35,7 +35,6 @@ const TreatmentEditor = ({ visit, onCreateTreatment }) => {
         discount,
       },
     }).then((data) => {
-      console.log(data);
       if (data.errors) {
         console.log(data.errors);
       } else {
