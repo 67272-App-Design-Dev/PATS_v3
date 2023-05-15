@@ -47,6 +47,9 @@ Rails.application.routes.draw do
 
   # Other custom routes
   get 'visits/:id/dosages', to: 'visits#dosages', as: :visit_dosages
+  get 'vis/pets', to: 'visits#pets', as: :visit_pets
+  put 'visits/:id/upsert', to: 'visits#upsert', as: :visit_upsert
+  post 'vis/create_it', to: 'visits#create_it', as: :visit_create_it
 
   # Routes for searching
   # get 'medicines/search', to: 'medicines#search', as: :medicine_search
