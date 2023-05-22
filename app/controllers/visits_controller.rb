@@ -9,33 +9,28 @@ class VisitsController < ApplicationController
     if current_user.owner?
       @visits = current_user.owner.visits.chronological.paginate(page: params[:page]).per_page(10)
     else
-      @visits_2 = Visit.chronological.last(10)
+      @visits_2 = Visit.chronological.last(10).map {|visit| VisitSerializer.new(visit)}
       @visits = Visit.chronological.paginate(page: params[:page]).per_page(10)
     end
   end
 
   def pets
-    render json: { pets: Pet.active.alphabetical }
+    render json: { pets: Pet.active.alphabetical.map {|pet| PetSerializer.new(pet)} }
   end
 
   def upsert
     id = params[:id]
     @visit = Visit.find(id)
     @visit.update(visit_params)
-    render json: @visit.to_json
+    render json: VisitSerializer.new(@visit)
   end
 
   def create_it
     @visit = Visit.new(visit_params)
     @visit.save
-    render json: @visit.to_json
+    render json: VisitSerializer.new(@visit)
   end
 
-  def in_range
-    # start_date = params[:start_date]
-    # end_date = params[:end_date]
-  end
-  
   def show
     get_related_data()
   end

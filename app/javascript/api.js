@@ -1,6 +1,6 @@
 function getCsrfToken() {
   // this bit of code is needed to prevent csrf attacks
-  return document.querySelector("[name=csrf-token]").content;
+  return document.querySelector("[name=csrf-token]")?.content;
 }
 
 export function get(url) {

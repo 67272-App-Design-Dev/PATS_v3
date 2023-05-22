@@ -8,12 +8,15 @@ const DosageEditor = ({ visit, onCreateDosage }) => {
   const [medicineOptions, setMedicineOptions] = useState([]);
   const [loading, setLoading] = useState();
   const [medicine, setMedicine] = useState();
-  const [unitsGiven, setUnitsGiven] = useState();
-  const [discount, setDiscount] = useState();
+  const [unitsGiven, setUnitsGiven] = useState("");
+  const [discount, setDiscount] = useState("");
+  const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     get(`/v1/visits/${visit.id}/medicines`).then((data) => {
+      console.log("GET DATA");
+      console.log(data);
       setLoading(false);
       setMedicineOptions(
         data.medicines.map((med) => {
@@ -26,7 +29,10 @@ const DosageEditor = ({ visit, onCreateDosage }) => {
     });
   }, []);
 
-  const createDosage = () => {
+  const createDosage = async () => {
+    console.log("creating dosage");
+    console.log(`/v1/visits/${visit.id}/create_dosage`);
+    setAnimating(true);
     post(`/v1/visits/${visit.id}/create_dosage`, {
       dosage: {
         medicine_id: medicine,
@@ -34,12 +40,14 @@ const DosageEditor = ({ visit, onCreateDosage }) => {
         discount,
       },
     }).then((data) => {
+      console.log("DONE");
       console.log(data);
       if (data.errors) {
         console.log(data.errors);
       } else {
         onCreateDosage(data);
       }
+      setAnimating(false);
     });
   };
 
@@ -49,13 +57,30 @@ const DosageEditor = ({ visit, onCreateDosage }) => {
 
   return (
     <>
-      <label>Medicine</label>
-      <Select setValue={setMedicine} options={medicineOptions} />
-      <label>Units Given</label>
-      <NumberInput value={unitsGiven} setValue={setUnitsGiven} />
-      <label>Discount</label>
-      <NumberInput value={discount} setValue={setDiscount} />
-      <button onClick={createDosage}>Create</button>
+      <label htmlFor="meds">Medicine</label>
+      <Select
+        name="meds"
+        inputId="meds"
+        setValue={setMedicine}
+        options={medicineOptions}
+      />
+      <label htmlFor="units">Units Given</label>
+      <NumberInput
+        name="units"
+        id="units"
+        value={unitsGiven}
+        setValue={setUnitsGiven}
+      />
+      <label htmlFor="discount">Discount</label>
+      <NumberInput
+        name="discount"
+        id="discount"
+        value={discount}
+        setValue={setDiscount}
+      />
+      <button onClick={createDosage} disabled={animating}>
+        Create
+      </button>
     </>
   );
 };

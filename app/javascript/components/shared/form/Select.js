@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 
 // TODO: document
-const CustomSelect = ({ value, setValue, options }) => {
+const CustomSelect = ({ value, setValue, options, ...props }) => {
   return (
-    <Select options={options} onChange={(option) => setValue(option.value)} />
+    <Select
+      options={options}
+      onChange={(option) => setValue(option.value)}
+      {...props}
+    />
   );
 };
 

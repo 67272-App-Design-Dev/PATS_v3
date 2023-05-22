@@ -18,6 +18,16 @@ to run React, in a separate terminal, do:
 ./bin/webpacker-dev-server
 ```
 
+# testing
+
+yarn add --dev jest
+yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer
+yarn add --dev @testing-library/react
+yarn add -D jest-environment-jsdom
+yarn add msw --dev
+yarn add --dev react-select-event
+yarn add --dev whatwg-fetch
+
 ## Setup
 
 This version of the project requires only a sqlite3 database. After cloning this repo, install all gems with the `bundle install` on the command line. To set up the database and populate it with realistic sample records, run on the command line `rake db:populate`. The populate script will remove any old databases, create new development and test databases, run all the migrations to set up the structure and add in the triggers, and then create 240 owners with over 450 pets and several thousand visits. (Every run will generate a different set of data and because of the large numbers and the callbacks used, it will take a few minutes.)

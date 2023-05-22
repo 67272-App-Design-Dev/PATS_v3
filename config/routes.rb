@@ -11,6 +11,11 @@ Rails.application.routes.draw do
       post 'visits/:id/create_treatment', to: 'visit_show#create_treatment', as: :visit_create_treatment
       get 'visits/:id/procedures', to: 'visit_show#procedures', as: :visit_show_procedure
       delete 'visits/:id/treatments/:treatment_id', to: 'visit_show#delete_treatment', as: :delete_visit_treatment
+
+      # visit home page
+      get 'calendar/pets', to: 'calendar#pets', as: :visits_list_pets
+      put 'calendar/:id/update', to: 'calendar#update', as: :visits_list_update
+      post 'calendar/create', to: 'calendar#create', as: :visits_list_create
     end
   end
 
@@ -44,12 +49,6 @@ Rails.application.routes.draw do
   get 'procedure_costs/new', to: 'procedure_costs#new', as: :new_procedure_cost
   post 'medicine_costs', to: 'medicine_costs#create', as: :medicine_costs
   post 'procedure_costs', to: 'procedure_costs#create', as: :procedure_costs
-
-  # Other custom routes
-  get 'visits/:id/dosages', to: 'visits#dosages', as: :visit_dosages
-  get 'vis/pets', to: 'visits#pets', as: :visit_pets
-  put 'visits/:id/upsert', to: 'visits#upsert', as: :visit_upsert
-  post 'vis/create_it', to: 'visits#create_it', as: :visit_create_it
 
   # Routes for searching
   # get 'medicines/search', to: 'medicines#search', as: :medicine_search
