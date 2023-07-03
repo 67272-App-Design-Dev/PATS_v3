@@ -36,6 +36,8 @@ function NewPetForm({ newDate, setNewDate, setEditorOpen, newEvent }) {
   const [petId, setPetId] = React.useState();
   const [pets, setPets] = React.useState();
 
+  // useEffect will trigger any time the dependency array (second argument) changes.
+  // in this case, the dependency array is empty, so it will only fire on load
   React.useEffect(() => {
     get("/v1/calendar/pets").then((response) => {
       setPets(
@@ -90,42 +92,37 @@ const VisitCalendar = ({ visits }) => {
   const [editorOpen, setEditorOpen] = React.useState(false);
   const [newDate, setNewDate] = React.useState();
 
-  const onEventDrop = React.useCallback(
-    (data) => {
-      const { start, end, event } = data;
-      const newDate = moment(start, DATE_FORMAT);
-      const payload = { date: newDate.format(DATE_FORMAT) };
-      put(`/v1/calendar/${event.id}/update`, { visit: payload }).then(
-        (updatedVisit) => {
-          setEvents(
-            events.map((otherEvent) => {
-              if (otherEvent.id === updatedVisit.data.attributes.id) {
-                return visitToEvent(updatedVisit);
-              }
-              return otherEvent;
-            })
-          );
-        }
-      );
-    },
-    [events]
-  );
+  function onEventDrop(data) {
+    const { start, end, event } = data;
+    const newDate = moment(start, DATE_FORMAT);
+    const payload = { date: newDate.format(DATE_FORMAT) };
+    put(`/v1/calendar/${event.id}/update`, { visit: payload }).then(
+      (updatedVisit) => {
+        setEvents(
+          events.map((otherEvent) => {
+            // replace the existing element with the updated json
+            if (otherEvent.id === updatedVisit.data.attributes.id) {
+              return visitToEvent(updatedVisit);
+            }
+            return otherEvent;
+          })
+        );
+      }
+    );
+  }
 
-  const newEvent = React.useCallback(
-    (visit) => {
-      post("/v1/calendar/create", { visit }).then((newVisit) => {
-        setEvents(events.concat(visitToEvent(newVisit)));
-      });
-    },
-    [events]
-  );
+  function newEvent(visit) {
+    post("/v1/calendar/create", { visit }).then((newVisit) => {
+      setEvents(events.concat(visitToEvent(newVisit)));
+    });
+  }
 
-  const onSelectSlot = (data) => {
+  function onSelectSlot(data) {
     if (!editorOpen) {
       setNewDate(data.start);
       setEditorOpen(true);
     }
-  };
+  }
 
   if (!events || events.length === 0) {
     return <div>loading...</div>;

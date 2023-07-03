@@ -13,6 +13,9 @@ const mockDosage = {
   id: "333",
 };
 
+// This mock server allows us to specify what we want to be returned
+// when http calls are made to certain endpoints from the frontend.
+// This allows us to run these as standalone frontend tests.
 const server = setupServer(
   rest.get("/v1/visits/1/medicines", (req, res, ctx) => {
     return res(
@@ -43,9 +46,11 @@ test("loads medication options and can enter and submit form", async () => {
   const onCreateDosage = jest.fn();
   server.printHandlers();
 
-  wrapper = await render(
+  wrapper = render(
     <DosageEditor visit={visit} onCreateDosage={onCreateDosage} />
   );
+  // tests should mimic how a user would use the app.
+  // in this case, we look for label text and buttons
 
   // this waits until Medicine appears in the DOM
   await screen.findByLabelText("Medicine");

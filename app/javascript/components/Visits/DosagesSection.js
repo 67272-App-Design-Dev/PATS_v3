@@ -4,20 +4,21 @@ import Dosage from "./Dosage";
 import DosageEditor from "./DosageEditor";
 import PropTypes from "prop-types";
 
-const DosagesSection = ({ visit, initialDosages }) => {
+function DosagesSection({ visit, initialDosages }) {
   // initializes `dosages` to `initialDosages` so we can edit that list
+  // as we add more dosages.
   const [dosages, setDosages] = useState(initialDosages);
   const [isEditing, setIsEditing] = useState(false);
 
-  const removeDosageFromDisplay = (dosage) => {
+  function removeDosageFromDisplay(dosage) {
     setDosages(dosages.filter((otherDosage) => otherDosage.id !== dosage.id));
-  };
+  }
 
-  const addDosageToDisplay = (dosage) => {
+  function addDosageToDisplay(dosage) {
     setDosages(dosages.concat(dosage));
-  };
+  }
 
-  const deleteDosage = (dosage) => {
+  function deleteDosage(dosage) {
     if (dosage.id) {
       const url = `/v1/visits/${visit.id}/dosages/${dosage.id}`;
       destroy(url).then((data) => {
@@ -34,7 +35,7 @@ const DosagesSection = ({ visit, initialDosages }) => {
     } else {
       removeDosageFromDisplay(dosage);
     }
-  };
+  }
 
   return (
     <>
@@ -42,13 +43,16 @@ const DosagesSection = ({ visit, initialDosages }) => {
       {dosages.map((dosage, i) => {
         return (
           <Dosage
-            key={`dosage-${i}-${dosage.id}`}
+            // `key` is how React determines what component to update, so it's
+            // important to have it be non-reliant on index in case the index changes
+            key={`dosage-${dosage.id}`}
             dosage={dosage}
             onDelete={deleteDosage}
           />
         );
       })}
       <button onClick={() => setIsEditing(true)}>Create New Dosage</button>
+      <br />
       {isEditing && (
         <DosageEditor
           visit={visit}
@@ -60,7 +64,7 @@ const DosagesSection = ({ visit, initialDosages }) => {
       )}
     </>
   );
-};
+}
 
 DosagesSection.propTypes = {
   visit: PropTypes.object.isRequired,

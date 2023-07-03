@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const BooleanInput = ({ keyPrefix, value, setValue }) => {
+function BooleanInput({ keyPrefix, value, setValue }) {
   return (
     <fieldset>
       <div>
@@ -32,7 +32,7 @@ const BooleanInput = ({ keyPrefix, value, setValue }) => {
       </div>
     </fieldset>
   );
-};
+}
 
 BooleanInput.propTypes = {
   keyPrefix: PropTypes.string.isRequired,

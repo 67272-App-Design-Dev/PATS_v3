@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Treatment = ({ treatment, onDelete }) => {
+function Treatment({ treatment, onDelete }) {
   return (
     <>
       <p>
@@ -16,7 +16,7 @@ const Treatment = ({ treatment, onDelete }) => {
       </p>
     </>
   );
-};
+}
 
 Treatment.propTypes = {
   treatment: PropTypes.object.isRequired,

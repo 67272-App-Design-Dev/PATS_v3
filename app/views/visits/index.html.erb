@@ -1,5 +1,10 @@
-<%= render partial: "partials/structure1", locals: {model_name: "visit", 
+<%
+=begin%>
+ <%= render partial: "partials/structure1", locals: {model_name: "visit", 
                                                          primary: "visits_list", 
                                                          secondary: nil,
-                                                         sidebar: nil} %>
+                                                         sidebar: nil} %> 
+<%
+=end%>
+<h2>Visits</h2>
 <%= react_component("Visits/VisitCalendar", { visits: @visits_2 }) %>

@@ -13,6 +13,10 @@ rails s
 ```
 
 to run React, in a separate terminal, do:
+https://github.com/reactjs/react-rails#get-started-with-shakapacker
+
+before running rails generate react:install
+source_entry_path: packs
 
 ```bash
 ./bin/webpacker-dev-server

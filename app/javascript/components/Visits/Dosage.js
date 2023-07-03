@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Dosage = ({ dosage, onDelete }) => {
+function Dosage({ dosage, onDelete }) {
   return (
     <>
       <p>
@@ -10,7 +10,7 @@ const Dosage = ({ dosage, onDelete }) => {
       </p>
     </>
   );
-};
+}
 
 Dosage.propTypes = {
   dosage: PropTypes.object.isRequired,

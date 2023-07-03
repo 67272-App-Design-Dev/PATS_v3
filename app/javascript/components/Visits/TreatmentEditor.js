@@ -4,6 +4,7 @@ import NumberInput from "../shared/form/NumberInput";
 import BooleanInput from "../shared/form/BooleanInput";
 import Select from "../shared/form/Select";
 import PropTypes from "prop-types";
+import { isEmpty } from "lodash";
 
 const TreatmentEditor = ({ visit, onCreateTreatment }) => {
   const [procedureOptions, setProcedureOptions] = useState([]);
@@ -12,6 +13,8 @@ const TreatmentEditor = ({ visit, onCreateTreatment }) => {
   const [successful, setSuccessful] = useState();
   const [discount, setDiscount] = useState();
 
+  // useEffect will trigger any time the dependency array (second argument) changes.
+  // in this case, the dependency array is empty, so it will only fire on load
   useEffect(() => {
     setLoading(true);
     get(`/v1/visits/${visit.id}/procedures`).then((data) => {
@@ -27,12 +30,13 @@ const TreatmentEditor = ({ visit, onCreateTreatment }) => {
     });
   }, []);
 
-  const createTreatment = () => {
+  function createTreatment() {
     post(`/v1/visits/${visit.id}/create_treatment`, {
       treatment: {
         procedure_id: procedure,
+        // syntactic sugar for "successful: successful"
         successful,
-        discount,
+        discount: isEmpty(discount) ? 0 : discount,
       },
     }).then((data) => {
       if (data.errors) {
@@ -42,10 +46,10 @@ const TreatmentEditor = ({ visit, onCreateTreatment }) => {
         onCreateTreatment(data.data.attributes);
       }
     });
-  };
+  }
 
   if (loading || procedureOptions?.length === 0) {
-    return <div>loading..</div>;
+    return <div>loading...</div>;
   }
 
   return (
@@ -53,7 +57,11 @@ const TreatmentEditor = ({ visit, onCreateTreatment }) => {
       <label>Procedure</label>
       <Select setValue={setProcedure} options={procedureOptions} />
       <label>Successful</label>
-      <BooleanInput value={successful} setValue={setSuccessful} />
+      <BooleanInput
+        value={successful}
+        setValue={setSuccessful}
+        keyPrefix={`treatment-${visit.id}`}
+      />
       <label>Discount</label>
       <NumberInput value={discount} setValue={setDiscount} />
       <button onClick={createTreatment}>Create</button>
@@ -65,6 +73,5 @@ TreatmentEditor.propTypes = {
   visit: PropTypes.object.isRequired,
   onCreateTreatment: PropTypes.func.isRequired,
 };
-// <%= f.input :procedure_id, collection: Procedure.alphabetical.to_a, include_blank: true %>
 
 export default TreatmentEditor;

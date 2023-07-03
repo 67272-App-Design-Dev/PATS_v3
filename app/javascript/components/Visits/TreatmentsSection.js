@@ -4,8 +4,8 @@ import Treatment from "./Treatment";
 import TreatmentEditor from "./TreatmentEditor";
 import PropTypes from "prop-types";
 
-const VisitsSection = ({ visit, initialTreatments }) => {
-  // initializes `treatments` to `initialTreatments` so we can edit that list
+function VisitsSection({ visit, initialTreatments }) {
+  // initializes `treatments` to `initialTreatments` so we can edit that list later
   const [treatments, setTreatments] = useState(
     initialTreatments.map((treatmentData) => {
       return treatmentData.data.attributes;
@@ -13,17 +13,17 @@ const VisitsSection = ({ visit, initialTreatments }) => {
   );
   const [isEditing, setIsEditing] = useState(false);
 
-  const removeTreatmentFromDisplay = (treatment) => {
+  function removeTreatmentFromDisplay(treatment) {
     setTreatments(
       treatments.filter((otherTreatment) => otherTreatment.id !== treatment.id)
     );
-  };
+  }
 
-  const addTreatmentToDisplay = (treatment) => {
+  function addTreatmentToDisplay(treatment) {
     setTreatments(treatments.concat(treatment));
-  };
+  }
 
-  const deleteTreatment = (treatment) => {
+  function deleteTreatment(treatment) {
     if (treatment.id) {
       const url = `/v1/visits/${visit.id}/treatments/${treatment.id}`;
       destroy(url).then((data) => {
@@ -40,7 +40,7 @@ const VisitsSection = ({ visit, initialTreatments }) => {
     } else {
       removeTreatmentFromDisplay(treatment);
     }
-  };
+  }
 
   return (
     <>
@@ -48,13 +48,16 @@ const VisitsSection = ({ visit, initialTreatments }) => {
       {treatments.map((treatment, i) => {
         return (
           <Treatment
-            key={`treatment-${i}-${treatment.id}`}
+            // `key` is how React determines what component to update, so it's
+            // important to have it be non-reliant on index in case the index changes
+            key={`treatment-${treatment.id}`}
             treatment={treatment}
             onDelete={deleteTreatment}
           />
         );
       })}
       <button onClick={() => setIsEditing(true)}>Create New Treatment</button>
+      <br />
       {isEditing && (
         <TreatmentEditor
           visit={visit}
@@ -66,7 +69,7 @@ const VisitsSection = ({ visit, initialTreatments }) => {
       )}
     </>
   );
-};
+}
 
 VisitsSection.propTypes = {
   visit: PropTypes.object.isRequired,

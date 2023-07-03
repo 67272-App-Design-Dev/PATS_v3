@@ -1,3 +1,9 @@
+/**
+ *
+ * This file contains helper functions to make HTTP requests to the the rails API.
+ * You may consider subbing this out with Axios or any other JS HTTP client.
+ */
+
 function getCsrfToken() {
   // this bit of code is needed to prevent csrf attacks
   return document.querySelector("[name=csrf-token]")?.content;

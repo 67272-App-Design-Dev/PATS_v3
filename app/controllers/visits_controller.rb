@@ -14,23 +14,6 @@ class VisitsController < ApplicationController
     end
   end
 
-  def pets
-    render json: { pets: Pet.active.alphabetical.map {|pet| PetSerializer.new(pet)} }
-  end
-
-  def upsert
-    id = params[:id]
-    @visit = Visit.find(id)
-    @visit.update(visit_params)
-    render json: VisitSerializer.new(@visit)
-  end
-
-  def create_it
-    @visit = Visit.new(visit_params)
-    @visit.save
-    render json: VisitSerializer.new(@visit)
-  end
-
   def show
     get_related_data()
   end
