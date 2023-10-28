@@ -59,14 +59,17 @@ function VisitsSection({ visit, initialTreatments }) {
       <button onClick={() => setIsEditing(true)}>Create New Treatment</button>
       <br />
       {isEditing && (
-        <TreatmentEditor
-          visit={visit}
-          onCreateTreatment={(treatment) => {
-            addTreatmentToDisplay(treatment);
-            setIsEditing(false);
-          }}
-        />
+        <>
+          <TreatmentEditor
+            visit={visit}
+            onCreateTreatment={(treatment) => {
+              addTreatmentToDisplay(treatment);
+              setIsEditing(false);
+            } } />&nbsp;&nbsp;
+            <a onClick={() => setIsEditing(false)}>Cancel</a>
+        </>
       )}
+
     </>
   );
 }

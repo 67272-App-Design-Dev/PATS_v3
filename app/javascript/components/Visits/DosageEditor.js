@@ -77,7 +77,7 @@ function DosageEditor({ visit, onCreateDosage }) {
       />
       <button onClick={createDosage} disabled={animating}>
         Create
-      </button>
+      </button>&nbsp;&nbsp;
     </>
   );
 }

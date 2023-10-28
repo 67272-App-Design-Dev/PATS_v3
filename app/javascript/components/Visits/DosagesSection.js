@@ -54,13 +54,15 @@ function DosagesSection({ visit, initialDosages }) {
       <button onClick={() => setIsEditing(true)}>Create New Dosage</button>
       <br />
       {isEditing && (
-        <DosageEditor
-          visit={visit}
-          onCreateDosage={(dosage) => {
-            addDosageToDisplay(dosage);
-            setIsEditing(false);
-          }}
-        />
+        <>
+          <DosageEditor
+            visit={visit}
+            onCreateDosage={(dosage) => {
+              addDosageToDisplay(dosage);
+              setIsEditing(false);
+            } } />&nbsp;&nbsp;
+            <a onClick={() => setIsEditing(false)}>Cancel</a>
+        </>
       )}
     </>
   );
