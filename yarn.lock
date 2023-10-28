@@ -5759,10 +5759,10 @@ raw-body@2.5.1:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-react-big-calendar@^1.6.9:
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/react-big-calendar/-/react-big-calendar-1.6.9.tgz"
-  integrity sha512-yuRZGUtg7txy8pt070dx5lN1eoun4RqXx7MTORI3lGYCwKbqhACDXzbu2CAvCw9LlwtC4GRDca68VLIQoarVCA==
+react-big-calendar@^1.8.4:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/react-big-calendar/-/react-big-calendar-1.8.4.tgz#dac57444011d2e3752bb73bd959b4f6a3cd9a201"
+  integrity sha512-zo2LDQxWHvcnkvtgzZlxJsCfi6fI8neOSyjG5ntePLO2CAlkhHiwwXgynxIFeWCwJ5LMnhN6tBt03IN4Y0bOzQ==
   dependencies:
     "@babel/runtime" "^7.20.7"
     clsx "^1.2.1"
