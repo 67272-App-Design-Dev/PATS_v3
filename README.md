@@ -18,16 +18,6 @@ To get this running after cloning the project repp, you need to take the followi
 
 4. Start rails and react with `rails s; yarn start`
 
-If you want to run React in a separate terminal, do:
-https://github.com/reactjs/react-rails#get-started-with-shakapacker
-
-before running rails generate react:install
-source_entry_path: packs
-
-```bash
-./bin/webpacker-dev-server
-```
-
 # testing
 
 yarn add --dev jest
