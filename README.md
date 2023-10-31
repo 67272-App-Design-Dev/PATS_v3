@@ -31,11 +31,17 @@ source_entry_path: packs
 # testing
 
 yarn add --dev jest
+
 yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer
+
 yarn add --dev @testing-library/react
+
 yarn add -D jest-environment-jsdom
+
 yarn add msw --dev
+
 yarn add --dev react-select-event
+
 yarn add --dev whatwg-fetch
 
 ## Setup
