@@ -1,18 +1,24 @@
 # 67272_PATS_v3
 
-This is a basic Rails app that was built as a class demonstration in the spring of 2018. This version focuses more on using VueJS, enhancing the user experience with Ajax, and adding search functionality.
+This is a basic Rails app that was built as a class demonstration. This version focuses more on using ReactJS, enhancing the user experience with Ajax, and adding search functionality.
 
-The class is Application Design & Development (67-272) and is for students in [Information Systems at Carnegie Mellon University](https://67272.cmuis.net). We have posted this code on [github.com](https://github.com/profh) in a public directory so that (a) it is readily accessible to students and (b) that students will get a little familiarity with github.com.
+The class is Application Design & Development (67-272) and is for students in [Information Systems at Carnegie Mellon University](https://67272.cmuis.net). We have posted this code on [github.com](https://github.com/67272-App-Design-Dev) in a public directory so that (a) it is readily accessible to students and (b) that students will get a little familiarity with github.com.
 
-This project does require the use of several gems to work properly. Check the Gemfile to see which gems are used. This project also assumes the user is running Ruby 2.4.x since that is what is used in the course.
+This project does require the use of several gems to work properly. Check the Gemfile to see which gems are used. This project also assumes the user is running Ruby 3.1.x since that is what is used in the course.
 
 ## Running
 
-```bash
-rails s
-```
+To get this running after cloning the project repp, you need to take the following steps:
 
-to run React, in a separate terminal, do:
+1. Install yarn with the command `npm install --global yarn`. Verify it's installed with the command `yarn -v`
+
+2. Run `bundle install` and then `rails db:populate` to get the react-rails gem and create and populate the database.
+
+3. Install the React packages with `yarn install`
+
+4. Start rails and react with `rails s; yarn start`
+
+If you want to run React in a separate terminal, do:
 https://github.com/reactjs/react-rails#get-started-with-shakapacker
 
 before running rails generate react:install
