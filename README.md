@@ -8,7 +8,7 @@ This project does require the use of several gems to work properly. Check the Ge
 
 ## Running
 
-To get this running after cloning the project repp, you need to take the following steps:
+To get this running after cloning the project repo, you need to take the following steps:
 
 1. Install yarn with the command `npm install --global yarn`. Verify it's installed with the command `yarn -v`
 
