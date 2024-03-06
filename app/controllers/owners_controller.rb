@@ -7,6 +7,8 @@ class OwnersController < ApplicationController
   def index
     # finding all the active owners and paginating that list (will_paginate)
     @active_owners = Owner.active.alphabetical.paginate(page: params[:page]).per_page(15)
+    # render template: "owners/index"
+    # layout 'application'
   end
 
   def show

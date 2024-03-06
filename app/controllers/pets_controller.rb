@@ -18,8 +18,11 @@ class PetsController < ApplicationController
   end
 
   def show
-    # get the last 10 visits for this pet
+    # already got @pet by the before_action :set_pet
+    # now get the last 10 visits for this pet
     @recent_visits = @pet.visits.chronological.last(10).to_a
+    # render template: "pets/show"
+    # layout 'application'
   end
 
   def new

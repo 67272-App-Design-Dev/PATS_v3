@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   def new
+    # render template[:new]
+    # layout: 'application'
   end
   
   def create
