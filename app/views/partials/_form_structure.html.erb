@@ -8,16 +8,17 @@
           <div class="row">
             <div class="form-inputs">
               <%= render partial: "#{fields}", locals: { f: f } %>
+            </div>
           </div>
-        </div>
+          <p>&nbsp;</p>
+          <div class="row">
+            <div class="form-actions col s9">
+              <%= f.button :submit %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-      <div class="row">
-        <div class="form-actions col s9">
-          <%= f.button :submit %>
-        </div>
-      </div>
-    <% end %>
   </div>
 </div>
 <%= link_to 'Back', :back %>

@@ -10,30 +10,31 @@
               <%= render partial: "#{fields1}", locals: { f: f } %>
             </div>
           </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col s12">
-        <div class="card grey lighten-3">
+		  
           <div class="row">
-            <div class="card-content">
-              <span class="card-title"><%= section_2 %></span>
-              <div class="form-inputs">
-                <%= render partial: "#{fields2}", locals: { f: f } %>
-              </div>
+            <div class="col s12">
+              <div class="card grey lighten-3">
+                <div class="row">
+                  <div class="card-content">
+                    <span class="card-title"><%= section_2 %></span>
+                    <div class="form-inputs">
+                      <%= render partial: "#{fields2}", locals: { f: f } %>
+                    </div>
+                  </div>
+                </div>    
+              </div>              
             </div>
-          </div>    
-        </div>              
+          </div>
+		 
+          <p>&nbsp;</p>
+          <div class="row">
+            <div class="form-actions col s9">
+              <%= f.button :submit %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-
-      <div class="row">
-        <div class="form-actions col s9">
-          <%= f.button :submit %>
-        </div>
-      </div>
-    <% end %>
   </div>
 </div>
 <%= link_to 'Back', :back %>
